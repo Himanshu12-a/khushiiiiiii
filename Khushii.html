@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Special Birthday Wish</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fcb69f, #ffe0ac);
+      background-size: 800% 800%;
+      animation: gradientShift 20s ease infinite;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #ff3399;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #ff3399;
+      text-shadow: 2px 2px 4px #fff0f5;
+    }
+
+    .wish {
+      font-size: 20px;
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #fff0f5;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #ffc0cb;
+      line-height: 1.6;
+      min-height: 200px;
+      text-align: justify;
+    }
+
+    .from {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #cc0066;
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 10s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    #excitedBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      background-color: #ff69b4;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      z-index: 999;
+      display: none;
+    }
+
+    #excitedBtn:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: radial-gradient(circle, #ffb6c1 0%, #ff69b4 60%);
+      border-radius: 50%;
+      animation: sparkle-float 3s ease-out forwards;
+      z-index: 9999;
+      opacity: 0.8;
+    }
+
+    @keyframes sparkle-float {
+      0% {
+        transform: scale(1) translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.5) translateY(-200px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .button-animation {
+      animation: pulse 0.6s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+    <audio id="bg-music" autoplay loop>
+        <source src="peaceful.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+  <div class="container">
+    <h1>🎉 Happy Birthday, Khushi! 🎉</h1>
+    <div class="wish" id="wishText"></div>
+    <div class="from" id="fromText">
+      — With love, from all of us:
+    </div>
+  </div>
+
+  <a href="khushi.html">
+    <button id="excitedBtn">Are You Excited For More!!!</button>
+  </a>
+
+  <script>
+    // Floating hearts animation
+    const colors = ["#ff99cc", "#ff66b2", "#ff4da6", "#ff80bf"];
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+      heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.zIndex = 0;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 300);
+
+    // Typing effect
+    const text = `On this beautiful day, we all just want to take a moment to remind you how truly special you are. Your kindness, your laughter, your endless positivity — they light up every room and every heart you touch. From the smallest giggles to the biggest adventures, you've made every moment brighter just by being you. We hope this year brings you everything your heart desires — adventures that excite you, quiet moments that calm you, people who love you deeply, and dreams that take flight. Today, we celebrate not just your birthday, but the wonderful light you bring into all our lives. Happy birthday, Khushi — keep being your amazing, magical self.`;
+
+    const wishDiv = document.getElementById("wishText");
+    const fromDiv = document.getElementById("fromText");
+    const excitedBtn = document.getElementById("excitedBtn");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        wishDiv.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      } else {
+        fromDiv.style.display = "block";
+        setTimeout(() => {
+          excitedBtn.style.display = "inline-block";
+        }, 1000);
+      }
+    }
+    window.onload = typeWriter;
+
+    window.addEventListener('click', () => {
+    const audio = document.getElementById('bg-music');
+    audio.play().catch(() => {});
+  });
+    // Button click animation
+    excitedBtn.addEventListener("click", () => {
+      excitedBtn.classList.add("button-animation");
+      setTimeout(() => {
+        excitedBtn.classList.remove("button-animation");
+      }, 600);
+    });
+  </script>
+</body>
+</html>
